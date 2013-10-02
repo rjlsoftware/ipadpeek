@@ -9,50 +9,73 @@ var setFrameUrl = function(url) {
 
 var rotate = function() {
   $('#ipad').toggleClass('landscape').toggleClass('portrait');
+  $('#iphone').toggleClass('landscape').toggleClass('portrait');
+  $('#iphone5').toggleClass('landscape').toggleClass('portrait');
 }
 
-$(function(){
+var setDevice = function(device) {
+  if (!device || device == 'undefined') return;
+  if (device.toLowerCase() === 'ipad') {
+    $("#to_ipad").trigger("click");
+  } else if (device.toLowerCase() === 'iphone') {
+    $("#to_iphone").trigger("click");
+  } else if (device.toLowerCase() === 'iphone5') {
+    $("#to_iphone5").trigger("click");
+  }
+}
 
-setFrameUrl($.url.param('url'));
-if ($.url.param('portrait')) rotate();
+var parseURLParams = function() {
+  //Set the frame url based on the url param
+  setFrameUrl($.url.param('url'));
 
-$('#rotate').click(rotate);
+  //Which device?
+  setDevice($.url.param('device'));
 
-$('#reload').click(function(){
-  $('#frame').attr('src',$('#frame').attr('src'));
-});
+  //If portrait exists, set it to portrait.
+  if ($.url.param('portrait')) rotate();
+}
 
-$('#url').focus(function(){
-  $('#kbd').show();
-});
+$(document).ready(function(){
+  //Setup handlers
+  $('#rotate').click(rotate);
 
-$('#url').blur(function(){
-  $('#kbd').hide();
-});
+  $('#to_ipad').click(function(){
+    $('#iphone').attr('id','ipad');
+    $('#iphone5').attr('id','ipad');
+  });
 
-$('#url').keyup(function(evt){
-  if (evt.keyCode != 13) return;
-  $('#url').blur();
-  setFrameUrl($(this).val());
-});
+  $('#to_iphone').click(function(){
+    $('#ipad').attr('id','iphone');
+    $('#iphone5').attr('id','iphone');
+  });
 
-$('#google').focus(function(){
-  $('#kbd').show();
-});
+  $('#to_iphone5').click(function(){
+    $('#ipad').attr('id','iphone5');
+    $('#iphone').attr('id','iphone5');
+  });
 
-$('#google').blur(function(){
-  $('#kbd').hide();
-});
+  $('#url').focus(function(){
+    $('#keyboard').show();
+  });
 
-$('#google').keyup(function(evt){
-  if (evt.keyCode != 13) return;
-  $('#google').blur();
-  setFrameUrl("http://www.google.com/search?q="+escape($(this).val()));
-});
+  $('#url').blur(function(){
+    $('#keyboard').hide();
+  });
 
-$('#show_about').click(function(){
-  $('#about').slideToggle();
-  return false;
-});
+  $('#url').keyup(function(evt){
+    if (evt.keyCode != 13) return;
+    $('#url').blur();
+    setFrameUrl($(this).val());
+  });
 
+  $('#toggleHelp').click(function(){
+    $('#help').toggle();
+    if ($("#help").is(":visible")) {
+      $('html,body').animate({scrollTop: $("#help").offset().top});
+    } else {
+      $("#buttons").scrollTop();
+    }
+  });
+
+  parseURLParams();
 });
