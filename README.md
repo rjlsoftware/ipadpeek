@@ -3,7 +3,7 @@ ipadpeek
 
 Allows you to simulate a view within the ipad or iphone view port. Great for visual responsive design validation and screenshots.
 
-Demo: http://rjlweb.com/viewer/
+Demo: https://rawgithub.com/rjlsoftware/ipadpeek/master/index.html
 
 Known issues:
 ---------
