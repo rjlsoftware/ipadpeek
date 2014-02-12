@@ -8,7 +8,7 @@
   <link rel="shortcut icon" href="favicon.png" type="image/png" />
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
-<body>
+<body class="backgroundBlack">
 
 <div class="buttons">
   <div class="button" id="rotate" title="Rotate"></div>
@@ -26,12 +26,13 @@
 
 <div class="footer">
   <a href="#" id="toggleHelp">Toggle Help</a>
-  <div id="help" style="display:none">
+  <div id="help" style="display:none" >
     <p>You can pass options on the url to set default display settings.</p>
     <p><strong>device</strong> - set the default device to show. Valid options are: iphone, iphone5 or ipad</p>
     <p><strong>portrait</strong> - add this option to show portrait view</p>
+    <p><strong>white</strong> - add this option to change the background color to white</p>
     <p><strong>url</strong> - set the default website to load</p>
-    <p><strong>Example</strong> - ?portrait&device=iphone5</p>
+    <p><strong>Example</strong> - ?portrait&white&device=iphone5&url=http://google.com</p>
   </div>
 </div>
 

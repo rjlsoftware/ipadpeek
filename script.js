@@ -13,6 +13,10 @@ var rotate = function() {
   $('#iphone5').toggleClass('landscape').toggleClass('portrait');
 }
 
+var changeBackground = function() {
+  $('body').toggleClass('backgroundBlack').toggleClass('backgroundWhite');
+}
+
 var setDevice = function(device) {
   if (!device || device == 'undefined') return;
   if (device.toLowerCase() === 'ipad') {
@@ -33,11 +37,16 @@ var parseURLParams = function() {
 
   //If portrait exists, set it to portrait.
   if ($.url.param('portrait')) rotate();
+
+  //If white exists, set background color to white.
+  if ($.url.param('white')) changeBackground();
 }
 
 $(document).ready(function(){
   //Setup handlers
   $('#rotate').click(rotate);
+
+  $('body').dblclick(changeBackground);
 
   $('#to_ipad').click(function(){
     $('#iphone').attr('id','ipad');
